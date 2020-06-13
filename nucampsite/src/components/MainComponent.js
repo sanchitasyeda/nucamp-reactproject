@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Directory from './DirectoryComponent';
-import CampsiteInfo from './CampsiteInfoComponent';
 import { CAMPSITES } from '../shared/campsites';
-import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import Home from './HomeComponent';
+import About from './AboutComponent';
 import Contact from './ContactComponent';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import { COMMENTS } from '../shared/comments';
 import { PARTNERS } from '../shared/partners';
 import { PROMOTIONS } from '../shared/promotions';
+import CampsiteInfo from './CampsiteInfoComponent';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 class Main extends Component {
     constructor(props) {
@@ -22,12 +23,7 @@ class Main extends Component {
         };
     }
 
-    onCampsiteSelect(campsiteId) {
-        this.setState({ selectedCampsite: campsiteId });
-    }
-
     render() {
-
         const HomePage = () => {
             return (
                 <Home
@@ -46,7 +42,7 @@ class Main extends Component {
                 />
             );
         };    
-        
+
         return (
             <div>
                 <Header />
@@ -55,6 +51,7 @@ class Main extends Component {
                     <Route exact path='/directory' render={() => <Directory campsites={this.state.campsites} />} />
                     <Route path='/directory/:campsiteId' component={CampsiteWithId} />
                     <Route exact path='/contactus' component={Contact} />
+                    <Route exact path='/aboutus' render={() => <About partners={this.state.partners} />} />
                     <Redirect to='/home' />
                 </Switch>
                 <Footer />
